@@ -68,6 +68,6 @@ let mainState = {
   },
 };
 
-let game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio);
+let game = new Phaser.Game(window.innerWidth * window.devicePixelRatio, window.innerHeight * window.devicePixelRatio, Phaser.CANVAS);
 game.state.add('main', mainState);
 game.state.start('main');
