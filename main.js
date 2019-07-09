@@ -18,6 +18,7 @@ let mainState = {
     this.labelScore = game.add.text(20, 20, "0",
         { font: "30px Arial", fill: "#ffffff" });
     spaceKey.onDown.add(this.jump, this);
+    game.input.onDown.add(this.jump, this);
     this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
   },
   update: function() {
