@@ -33,7 +33,7 @@ let mainState = {
     if (this.bird.alive == false)
       return;
     this.jumpSound.play();
-    this.bird.body.velocity.y = -350 * window.devicePixelRatio;
+    this.bird.body.velocity.y = -350 * (window.devicePixelRatio / .75);
     let animation = game.add.tween(this.bird);
     animation.to({angle: -20}, 100);
     animation.start();
