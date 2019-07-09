@@ -24,7 +24,7 @@ let mainState = {
   update: function() {
     if (this.bird.angle < 20)
       this.bird.angle += 1;
-    if (this.bird.y < 0 || this.bird.y > 490)
+    if (this.bird.y < 0 || this.bird.y > 490 *  window.devicePixelRatio)
       this.restartGame();
     game.physics.arcade.overlap(
         this.bird, this.pipes, this.hitPipe, null, this);
@@ -51,7 +51,7 @@ let mainState = {
   },
   addRowOfPipes: function() {
     const hole = Math.floor(Math.random() * 5) + 1;
-    for (let i = 0; i < 8; i++)
+    for (let i = 0; i < 8 * window.devicePixelRatio; i++)
       if (i !== hole && i !== hole + 1)
         this.addOnePipe(400, i * 60 + 10);
     this.score += 1;
