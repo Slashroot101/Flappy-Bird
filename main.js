@@ -4,7 +4,8 @@ let mainState = {
   preload: function () {
     game.load.image('bird', 'assets/bird.png');
     this.pipes = game.add.group();
-    game.load.audio('jump', 'assets/jump.wav');
+    //game.load.audio('jump', 'assets/jump.wav');
+    game.cache.addSound('jump', 'assets/jump.wav', this.result);
     game.load.image('pipe', 'assets/pipe.png');
   },
   create: function () {
@@ -12,6 +13,7 @@ let mainState = {
     game.stage.backgroundColor = '#71c5cf';
     game.physics.startSystem(Phaser.Physics.ARCADE);
     this.bird = game.add.sprite(100, 245, 'bird');
+    this.bird.scale.set(.85, .85);
     game.physics.arcade.enable(this.bird);
     this.bird.body.gravity.y = 1000;
     let spaceKey = game.input.keyboard.addKey(
@@ -21,7 +23,7 @@ let mainState = {
         { font: "30px Arial", fill: "#ffffff" });
     spaceKey.onDown.add(this.jump, this);
     game.input.onDown.add(this.jump, this);
-    this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
+    this.timer = game.time.events.loop(1750, this.addRowOfPipes, this);
   },
   update: function() {
     if (this.bird.angle < 20)
@@ -41,6 +43,7 @@ let mainState = {
     animation.start();
   },
   restartGame: function() {
+    lastHolePosition = undefined;
     game.state.start('main');
   },
   addOnePipe: function(x, y){
@@ -54,10 +57,14 @@ let mainState = {
   addRowOfPipes: function() {
     let hole;
     if(lastHolePosition === undefined){
-      hole = Math.floor(Math.random() * 5 * window.devicePixelRatio) + 1;
+      hole = Math.floor(Math.random() * 3 * window.devicePixelRatio) + 6;
     } else {
-      hole = Math.floor(Math.random() * lastHolePosition + 3) + (lastHolePosition - 3);
+      hole = Math.floor(Math.random() * lastHolePosition + 3) + (lastHolePosition - 6 < 0 ? lastHolePosition - 0 : lastHolePosition - 6);
+      if(hole >= (8 * window.devicePixelRatio)){
+        hole = (8 * window.devicePixelRatio) - 4;
+      }
     }
+    console.log(hole, lastHolePosition, 8 * window.devicePixelRatio)
     lastHolePosition = hole;
     for (let i = 0; i < 8 * window.devicePixelRatio; i++)
       if (i !== hole && i !== hole + 1)
