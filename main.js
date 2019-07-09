@@ -1,3 +1,5 @@
+let lastHolePosition;
+
 let mainState = {
   preload: function () {
     game.load.image('bird', 'assets/bird.png');
@@ -50,7 +52,13 @@ let mainState = {
     pipe.outOfBoundsKill = true;
   },
   addRowOfPipes: function() {
-    const hole = Math.floor(Math.random() * 5 * window.devicePixelRatio) + 1;
+    let hole;
+    if(lastHolePosition === undefined){
+      hole = Math.floor(Math.random() * 5 * window.devicePixelRatio) + 1;
+    } else {
+      hole = Math.floor(Math.random() * lastHolePosition + 3) + (lastHolePosition - 3);
+    }
+    lastHolePosition = hole;
     for (let i = 0; i < 8 * window.devicePixelRatio; i++)
       if (i !== hole && i !== hole + 1)
         this.addOnePipe(400, i * 60 + 10);
