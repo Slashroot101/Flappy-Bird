@@ -50,7 +50,7 @@ let mainState = {
     pipe.outOfBoundsKill = true;
   },
   addRowOfPipes: function() {
-    const hole = Math.floor(Math.random() * 5) + 1;
+    const hole = Math.floor(Math.random() * 5 * window.devicePixelRatio) + 1;
     for (let i = 0; i < 8 * window.devicePixelRatio; i++)
       if (i !== hole && i !== hole + 1)
         this.addOnePipe(400, i * 60 + 10);
