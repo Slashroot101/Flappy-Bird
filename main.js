@@ -4,7 +4,7 @@ let mainState = {
   preload: function () {
     game.load.image('bird', 'assets/bird.png');
     this.pipes = game.add.group();
-    game.cache.addSound('jump', 'assets/jump.wav', game.load.audio('jump', 'assets/jump.wav'); );
+    game.cache.addSound('jump', 'assets/jump.wav', game.load.audio('jump', 'assets/jump.wav'));
     game.load.image('pipe', 'assets/pipe.png');
   },
   create: function () {
